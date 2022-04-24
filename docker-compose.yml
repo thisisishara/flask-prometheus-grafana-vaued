@@ -1,0 +1,46 @@
+version: '3.0'
+
+networks:
+  sliit_vaued_network:
+    external: false
+
+services:
+  grafana_container:
+    image: grafana/grafana-oss:8.5.0-ubuntu
+    container_name: grafana_container
+    restart: always
+    networks:
+      - sliit_vaued_network
+    ports:
+      - "9092:3000"
+    expose: [3000]
+    volumes:
+      - "./grafana/:/var/lib/grafana/"
+    links:
+      - prometheus_container
+
+  prometheus_container:
+    image: prom/prometheus:v2.35.0
+    container_name: prometheus_container
+    restart: always
+    networks:
+      - sliit_vaued_network
+    ports:
+      - "9090:9090"
+    expose: [9090]
+    volumes:
+      - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+    links:
+      - vaued_app_container
+
+  vaued_app_container:
+    build: ./vaued_app
+    container_name: vaued_app_container
+    restart: always
+    networks:
+      - sliit_vaued_network
+    ports:
+      - "9091:9091"
+    expose: [9091]
+    volumes:
+      - "./vaued_app/vaued_app.py:/vaued_app.py"
