@@ -30,6 +30,21 @@ def root():
     is_authenticated = False
     return render_template("Home.html")
 
+@app.route("/MLService/association", methods=['POST'])
+@cross_origin(headers=['Content-Type'])
+def mine_association_rule():
+    req_data = request.json
+    result = []
+
+    movi_list = [int(x) for x in re.sub('"', "", str(
+        req_data["MOVI_LIST"]).strip()).split(",")]
+    print(movi_list)
+
+    if req_data["ALGO"] == 'FPG':
+        result = association_rules_finder.get_rules_fp(movi_list)
+    elif req_data["ALGO"] == 'APR':
+        result = association_rules_finder.get_rules_ap(movi_list)
+
 
 if __name__ == "__main__":
     # provide app's version and deploy environment/config name to set a gauge metric
