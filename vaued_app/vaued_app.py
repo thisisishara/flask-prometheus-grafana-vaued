@@ -30,6 +30,29 @@ def root():
     is_authenticated = False
     return render_template("Home.html")
 
+@app.route("/auth", methods=['POST'])
+@cross_origin(headers=['Content-Type'])
+def auth():
+    credentials = request.values.to_dict()
+    print(credentials)
+    global is_authenticated
+    if str.lower(credentials['email']) == "admin@mdb.com" and \
+            str.lower(credentials['password']) == "admin":
+        is_authenticated = True
+        return render_template("AdminDashboard.html")
+    else:
+        is_authenticated = False
+        return render_template("Home.html", status="error")
+
+
+@app.route("/admin_dashboard", methods=['GET'])
+@cross_origin(headers=['Content-Type'])
+def admin_dashboard():
+    global is_authenticated
+    if is_authenticated:
+        return render_template("AdminDashboard.html")
+    else:
+        return render_template("Home.html", status="error")
 
 @app.route("/sign_out", methods=["GET"])
 @cross_origin(headers=['Content-Type'])
