@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="{{ url_for('static', filename='styles/bootstrap.min.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.dark.css') }}">
+
+<!-- FAVICONS -->
+<link rel="icon" href="{{ url_for('static', filename='media/ticket.png') }}" sizes="32x32" type="image/png">
+
+<title>theMovieDB &#8226; Admin Dashboard</title>
+<script src="{{ url_for('static', filename='components/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='components/AdminDashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='components/js.cookie.min.js') }}"></script>
+</head>
+<body class="text-dark herodash">
+	<!-- MAIN HEADER -->
+	<header
+		class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow dashboard-header disable-select"
+		style="z-index: 101">
+		<a href="#"
+			class="d-flex align-items-center text-dark text-decoration-none main">
+			<img class="mx-2 my-2" src="{{ url_for('static', filename='media/ticket.png') }}" alt="" width="40"
+			height="40"> <span class="fs-4 text-white"><strong>theMovieDB</strong>
+				| Admin Dashboard</span>
+		</a>
+		<button class="navbar-toggler position-absolute d-md-none collapsed"
+			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+			aria-controls="sidebarMenu" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<ul class="navbar-nav px-3 list-group list-group-horizontal">
+			<li class="nav-item text-nowrap my-auto"><a
+				class="nav-link text-white" href="{{url_for('sign_out')}}"><button
+						type="button" class="btn btn-outline-info btn-sm me-sm-3">Sign
+						out</button></a></li>
+		</ul>
+	</header>
+	<!-- VERTICAL SIDEBAR -->
+	<nav id="sidebarMenu"
+		class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse disable-select">
+		<div class="position-sticky pt-3">
+			<ul class="nav flex-column">
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="page"> <img
+						src="{{ url_for('static', filename='media/coordinate_system_white.png') }}" width="20px" class="mx-2" />
+						<span class="admindashboardlink">Dashboard</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"> <img
+						src="{{ url_for('static', filename='media/movie.png') }}" width="20px" class="mx-2" /> <span
+						class="admindashboardlink">Movie Management</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"> <img
+						src="{{ url_for('static', filename='media/user_white.png') }}" width="20px" class="mx-2" /> <span
+						class="admindashboardlink">User Management</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"> <img
+						src="{{ url_for('static', filename='media/login_white.png') }}" width="20px" class="mx-2" /> <span
+						class="admindashboardlink">Account Security</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"> <img
+						src="{{ url_for('static', filename='media/gear_white.png') }}" width="20px" class="mx-2" /> <span
+						class="admindashboardlink">Profile Settings</span>
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="maintag">
+		<div class="container-fluid" id="maincontainer">
+			<div class="row sidebarpage" id="admindashboard">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">Dashboard</h1>
+					<div class="btn-toolbar mb-2 mb-md-0">
+						<!-- DASH HEADER CONTENTS -->
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-md-12 mb-4">
+						<div class="h-100 p-4 text-white bg-dark rounded-3 bgsec">
+							<div class="row">
+								<div class="col-md-10 px-4">
+									<h2>Movies</h2>
+									<p>Manage movie details and descriptions. Keep the movie
+										database up-to-date.</p>
+									<button class="btn btn-outline-light" type="button"
+										id="moviedash">Manage</button>
+								</div>
+								<div class="col-md-2 text-center align-self-center">
+									<img class="my-auto p-2" src="{{ url_for('static', filename='media/videocam.png') }}">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 mb-4">
+						<div class="h-100 p-4 text-white bg-dark rounded-3 bgsec">
+							<div class="row">
+								<div class="col-md-10 px-4">
+									<h2>Users</h2>
+									<p>Manage user accounts easily. All accounts are
+										categorized according to the type making it easier to do the
+										necessary changes then and there.</p>
+									<button class="btn btn-outline-light" type="button"
+										id="userdash">Manage</button>
+								</div>
+								<div class="col-md-2 text-center align-self-center">
+									<img class="my-auto" src="{{ url_for('static', filename='media/id.png') }}">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 mb-4">
+						<div class="h-100 p-4 text-white bg-dark rounded-3 bgsec">
+							<div class="row">
+								<div class="col-md-10 px-4">
+									<h2>Security</h2>
+									<p>Security is a must. Have control over the accounts.
+										Deactivate vulnerable accounts with just one click.</p>
+									<button class="btn btn-outline-light" type="button"
+										id="securitydash">Manage</button>
+								</div>
+								<div class="col-md-2 text-center align-self-center">
+									<img class="my-auto" src="{{ url_for('static', filename='media/lockyel.png') }}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row sidebarpage" id="adminmoviemgmt">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">Movie Recommendations and Genre Prediction</h1>
+				</div>
+				<div id="collapseUsers"
+					class="accordion-collapse collapse show border-top border-bottom"
+					aria-labelledby="headingResearchers"
+					data-bs-parent="#accordionUserTypeSelect">
+					<div class="accordion-body" id="maccbody">
+						<div class="mb-3">
+							<strong>Genre Prediction</strong> <br>Copy and Paste any movie plot
+							and get a list of Genres predicted by various Machine Learning algorithms.
+						</div>
+						<!-- MOVIE ADDING FORM -->
+						<form class="row g-3" id="movieform" name="movieform">
+							<div class='col-8'>
+								<div class="row g-3">
+									<div class="col-12">
+										<textarea class="form-control" id="moviedesc" rows="10"
+											name="moviedesc" placeholder="Description"></textarea>
+									</div>
+									<div class="col-md-9">
+										<select id="algoselect" name="algoselect" class="form-select">
+											<option selected>Logistic Regression with OneVsRest
+												and TF-IDF</option>
+											<option>Linear SVC with OneVsRest and TF-IDF</option>
+											<option disabled>Random Forest Classifier with
+												OneVsRest and TF-IDF</option>
+											<option>Perceptron with OneVsRest and TF-IDF</option>
+											<option>Decision Tree Regressor with OneVsRest and
+												TF-IDF</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<button type="button" class="btn btn-dark w-100"
+											id="predictgenre" name="predictgenre"
+											data-task="classification">Predict Genres</button>
+									</div>
+									<div class="col-md-12">
+										<textarea class="form-control" id="moviegenre" rows="1"
+											name="moviegenre" placeholder="Predicted Genres"></textarea>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="accordion-body" id="raccbody">
+						<div class="mb-3">
+							<strong>Movie Recommendations</strong> <br>Select a movie from the dropdown list
+							and get a list of recommendations based on Ariori and FP-growth data mining rules.
+						</div>
+						<!-- RECOMMENDATIONS FORM -->
+						<form class="row g-3" id="recform" name="recform">
+							<div class='col-8'>
+								<div class="row g-3">
+									<div class="col-md-9">
+										<select id="movieselect" name="movieselect" class="form-select">
+											<option selected value="1">Deadpool (2015)</option>
+											<option value="2">Example (Year)</option>
+											<option value="3">Example (Year)</option>
+											<option value="4">Example (Year)</option>
+											<option value="5">Example (Year)</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<button type="button" class="btn btn-dark w-100"
+											id="gedrec" name="gedrec"
+											data-task="classification">Get Recommendations</button>
+									</div>
+									<div class="col-md-12">
+										<textarea class="form-control" id="recgrid" rows="1"
+											name="recgrid" placeholder="Retrieved Recommendations"></textarea>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row sidebarpage" id="adminusermgmt">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">User Management</h1>
+				</div>
+				<div id="collapseResearches"
+					class="accordion-collapse collapse show border-top border-bottom"
+					aria-labelledby="headingResearchers"
+					data-bs-parent="#accordionUserTypeSelect">
+					<div class="accordion-body">
+						<div class="mb-3">
+							<strong>Add New User Account</strong> <br>Create new user
+							accounts, Update or Delete existing user accounts of users who
+							have already signed up.
+						</div>
+						<!-- USER SIGNUP -->
+						<form class="row g-3" id="userform" name="userform">
+							<input type="hidden" class="userisupdate" name="userisupdate"
+								id="userisupdate" value="false"> <input type="hidden"
+								class="formtask" name="formtask" value="SIGNUP">
+							<div class="col-md-4">
+								<input type="email" class="form-control" id="useremail"
+									name="useremail" placeholder="Email">
+							</div>
+							<div class="col-md-4">
+								<input type="password" class="form-control" id="userpassword"
+									name="userpassword" placeholder="Password">
+							</div>
+							<div class="col-md-3" id="userconfpasswordgroup">
+								<input type="password" class="form-control"
+									id="userconfpassword" name="userconfpassword"
+									placeholder="Confirm Password">
+							</div>
+							<div class="col-md-1" id="userconfpasswordcb">
+								<input type="checkbox" class="btn-check btn-block w-100"
+									id="usershowpasswords" autocomplete="off"> <label
+									class="btn btn-danger" for="usershowpasswords"><span><img
+										id="usershowpasswordicon" src="{{ url_for('static', filename='media/eye.png') }}" alt="..." /></span></label>
+							</div>
+							<div class="col-12">
+								<div class="input-group">
+									<span class="input-group-text disable-select">First and
+										last name</span> <input type="text" aria-label="First name"
+										class="form-control" id="userfirstname" name="userfirstname">
+									<input type="text" aria-label="Last name" class="form-control"
+										id="userlastname" name="userlastname">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<select id="usergender" name="usergender" class="form-select">
+									<option selected>Gender</option>
+									<option>Female</option>
+									<option>Male</option>
+									<option>Other</option>
+								</select>
+							</div>
+							<div class="col-md-4" id="userrolegroup">
+								<select id="userrole" name="userrole" class="form-select">
+									<option selected>Role</option>
+									<option>Administrator</option>
+									<option>User</option>
+								</select>
+							</div>
+							<div class="col-12">
+								<button type="button" class="btn btn-dark" id="usersignup"
+									name="usersignup">Create Account</button>
+								<button type="button" class="btn btn-secondary invisible"
+									id="usercancelupdate" name="usercancelupdate">Cancel</button>
+							</div>
+						</form>
+
+
+						<div class="mt-5">
+							<strong>Existing Accounts of Users</strong> <br>Following is
+							a list of all users who have already signed up with theMovieDB.
+						</div>
+						<div class="userAccountsGrid" id="userAccountsGrid">
+							<!-- DYNAMICALLY GENERATED USER ACCOUNT LIST TABLE -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row sidebarpage" id="adminaccsec">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">Account Security</h1>
+					<div class="btn-toolbar mb-2 mb-md-0">
+						<!-- TOOLBAR IS EMPTY -->
+					</div>
+				</div>
+				<div class="userAccountsSecGrid" id="userAccountsSecGrid">
+					<!-- DYNAMICALLY GENERATED ACCOUNT LIST TABLE -->
+				</div>
+			</div>
+			<div class="row sidebarpage" id="adminprofsett">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2">Profile Settings</h1>
+					<div class="btn-toolbar mb-2 mb-md-0">
+						<!-- <div class="btn-group me-2">
+							<button type="button" class="btn btn-sm btn-outline-secondary">Profile Settings</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary">Privacy</button>
+						</div>
+						<button type="button"
+							class="btn btn-sm btn-outline-secondary dropdown-toggle">
+							<span data-feather="type"></span> Change Type
+						</button> -->
+					</div>
+				</div>
+				<div>Profile Settings are all good.</div>
+			</div>
+		</div>
+	</main>
+	<!-- TOAST -->
+	<!-- button type="button" class="btn btn-primary" id="liveToastBtn">Show
+			live toast</button-->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 102">
+		<div id="liveToast" class="toast hide bg-danger text-white"
+			role="alert" aria-live="assertive" aria-atomic="true">
+			<div id="liveToastHeaderDiv"
+				class="toast-header bg-danger text-white">
+				<img id="liveToastIcon" src="{{ url_for('static', filename='media/error_red_sq.png') }}"
+					class="rounded me-2" alt="..." width="25px"> <strong
+					class="me-auto" id="liveToastHeading">Bootstrap Toast</strong> <small
+					id="liveToastTime">Just Now</small>
+				<button type="button" class="btn-close btn-close-white"
+					data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+			<div class="toast-body" id="liveToastBody">Hello, world! This
+				is a toast message.</div>
+		</div>
+	</div>
+	<!-- LOADER
+	<button type="button" class="btn btn-primary" id="loaderBtn">Show
+		loader</button> -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 103">
+		<div id="loader" class="loader hide bg-dark text-white" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div id="loaderHeaderDiv" class="loader-header bg-dark text-white">
+				<img id="loaderIcon" src="{{ url_for('static', filename='media/waiting.gif') }}" class="rounded me-2"
+					alt="..." width="25px"> <strong class="me-auto"
+					id="loaderHeading">Bootstrap Loader</strong> <small id="loaderTime">Just
+					Now</small>
+				<!-- <button type="button" class="btn-close btn-close-white"
+					data-dismiss="loader" aria-label="Close"></button>-->
+			</div>
+			<div class="loader-body" id="loaderBody">Hello, world! This is
+				a loader message.</div>
+		</div>
+	</div>
+	<!-- BOOTSRAP JS CDN-->
+	<script src="Components/bootstrap.bundle.min.js"></script>
+</body>
+</html>
