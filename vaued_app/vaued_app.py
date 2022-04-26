@@ -30,6 +30,32 @@ def root():
     is_authenticated = False
     return render_template("Home.html")
 
+
+@app.route("/sign_out", methods=["GET"])
+@cross_origin(headers=['Content-Type'])
+def sign_out():
+    global is_authenticated
+    is_authenticated = False
+    return render_template("Home.html", status="signed_out")
+
+
+@app.route("/dev", methods=['GET'])
+@cross_origin(headers=['Content-Type'])
+def dev():
+    return render_template("Dev.html")
+
+
+@app.route("/version", methods=['GET'])
+@cross_origin(headers=['Content-Type'])
+def version():
+    return jsonify(
+        {
+            "Server": "ML Recommendations Engine Backend",
+            "Version": "1.0.2"
+        }
+    )
+
+
 @app.route("/MLService/association", methods=['POST'])
 @cross_origin(headers=['Content-Type'])
 def mine_association_rule():
