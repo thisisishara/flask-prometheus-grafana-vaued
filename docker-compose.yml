@@ -30,6 +30,7 @@ services:
     expose: [9090]
     volumes:
       - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./prometheus/data/:/prometheus/"
     links:
       - vaued_app_container
 
