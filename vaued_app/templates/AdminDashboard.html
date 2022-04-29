@@ -53,20 +53,20 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link"> <img
 						src="{{ url_for('static', filename='media/movie.png') }}" width="20px" class="mx-2" /> <span
-						class="admindashboardlink">Movie Management</span>
+						class="admindashboardlink">Movie-AI</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link"> <img
-						src="{{ url_for('static', filename='media/user_white.png') }}" width="20px" class="mx-2" /> <span
-						class="admindashboardlink">User Management</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link"> <img
-						src="{{ url_for('static', filename='media/login_white.png') }}" width="20px" class="mx-2" /> <span
-						class="admindashboardlink">Account Security</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link"> <img
-						src="{{ url_for('static', filename='media/gear_white.png') }}" width="20px" class="mx-2" /> <span
-						class="admindashboardlink">Profile Settings</span>
-				</a></li>
+{#				<li class="nav-item"><a class="nav-link"> <img#}
+{#						src="{{ url_for('static', filename='media/user_white.png') }}" width="20px" class="mx-2" /> <span#}
+{#						class="admindashboardlink">User Management</span>#}
+{#				</a></li>#}
+{#				<li class="nav-item"><a class="nav-link"> <img#}
+{#						src="{{ url_for('static', filename='media/login_white.png') }}" width="20px" class="mx-2" /> <span#}
+{#						class="admindashboardlink">Account Security</span>#}
+{#				</a></li>#}
+{#				<li class="nav-item"><a class="nav-link"> <img#}
+{#						src="{{ url_for('static', filename='media/gear_white.png') }}" width="20px" class="mx-2" /> <span#}
+{#						class="admindashboardlink">Profile Settings</span>#}
+{#				</a></li>#}
 			</ul>
 		</div>
 	</nav>
@@ -146,13 +146,13 @@
 							<strong>Genre Prediction</strong> <br>Copy and Paste any movie plot
 							and get a list of Genres predicted by various Machine Learning algorithms.
 						</div>
-						<!-- MOVIE ADDING FORM -->
+						<!-- MOVIE PREDICTIONS FORM -->
 						<form class="row g-3" id="movieform" name="movieform">
 							<div class='col-8'>
 								<div class="row g-3">
 									<div class="col-12">
 										<textarea class="form-control" id="moviedesc" rows="10"
-											name="moviedesc" placeholder="Description"></textarea>
+											name="moviedesc" placeholder="Movie Plot/ Description"></textarea>
 									</div>
 									<div class="col-md-9">
 										<select id="algoselect" name="algoselect" class="form-select">
@@ -179,37 +179,37 @@
 							</div>
 						</form>
 					</div>
-					<div class="accordion-body" id="raccbody">
-						<div class="mb-3">
-							<strong>Movie Recommendations</strong> <br>Select a movie from the dropdown list
-							and get a list of recommendations based on Ariori and FP-growth data mining rules.
-						</div>
-						<!-- RECOMMENDATIONS FORM -->
-						<form class="row g-3" id="recform" name="recform">
-							<div class='col-8'>
-								<div class="row g-3">
-									<div class="col-md-9">
-										<select id="movieselect" name="movieselect" class="form-select">
-											<option selected value="1">Deadpool (2015)</option>
-											<option value="2">Example (Year)</option>
-											<option value="3">Example (Year)</option>
-											<option value="4">Example (Year)</option>
-											<option value="5">Example (Year)</option>
-										</select>
-									</div>
-									<div class="col-md-3">
-										<button type="button" class="btn btn-dark w-100"
-											id="gedrec" name="gedrec"
-											data-task="classification">Get Recommendations</button>
-									</div>
-									<div class="col-md-12">
-										<textarea class="form-control" id="recgrid" rows="1"
-											name="recgrid" placeholder="Retrieved Recommendations"></textarea>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
+{#					<div class="accordion-body" id="raccbody">#}
+{#						<div class="mb-3">#}
+{#							<strong>Movie Recommendations</strong> <br>Select a movie from the dropdown list#}
+{#							and get a list of recommendations based on Ariori and FP-growth data mining rules.#}
+{#						</div>#}
+{#						<!-- RECOMMENDATIONS FORM -->#}
+{#						<form class="row g-3" id="recform" name="recform">#}
+{#							<div class='col-8'>#}
+{#								<div class="row g-3">#}
+{#									<div class="col-md-9">#}
+{#										<select id="movieselect" name="movieselect" class="form-select">#}
+{#											<option selected value="1">Deadpool (2015)</option>#}
+{#											<option value="2">Example (Year)</option>#}
+{#											<option value="3">Example (Year)</option>#}
+{#											<option value="4">Example (Year)</option>#}
+{#											<option value="5">Example (Year)</option>#}
+{#										</select>#}
+{#									</div>#}
+{#									<div class="col-md-3">#}
+{#										<button type="button" class="btn btn-dark w-100"#}
+{#											id="gedrec" name="gedrec"#}
+{#											data-task="classification">Get Recommendations</button>#}
+{#									</div>#}
+{#									<div class="col-md-12">#}
+{#										<textarea class="form-control" id="recgrid" rows="1"#}
+{#											name="recgrid" placeholder="Retrieved Recommendations"></textarea>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</form>#}
+{#					</div>#}
 				</div>
 			</div>
 			<div class="row sidebarpage" id="adminusermgmt">
@@ -363,6 +363,6 @@
 		</div>
 	</div>
 	<!-- BOOTSRAP JS CDN-->
-	<script src="Components/bootstrap.bundle.min.js"></script>
+	<script src="{{ url_for('static', filename='components/bootstrap.bundle.min.js') }}"> </script>
 </body>
 </html>
