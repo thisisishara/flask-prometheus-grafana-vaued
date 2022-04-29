@@ -45,6 +45,8 @@ services:
     expose: [9091]
     volumes:
       - "./vaued_app/vaued_app.py:/vaued_app.py"
+      - "./vaued_app/templates/:/templates/"
+      - "./vaued_app/static/:/static/"
 
   cadvisor:
     image: google/cadvisor:v0.33.0
