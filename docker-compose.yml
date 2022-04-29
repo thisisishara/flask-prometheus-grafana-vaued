@@ -45,3 +45,32 @@ services:
     expose: [9091]
     volumes:
       - "./vaued_app/vaued_app.py:/vaued_app.py"
+      - "./vaued_app/templates/:/templates/"
+      - "./vaued_app/static/:/static/"
+
+  cadvisor:
+    image: google/cadvisor:v0.33.0
+    container_name: cadvisor
+    restart: always
+    networks:
+      - sliit_vaued_network
+    ports:
+      - "9093:8080"
+    expose: [9093]
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.0.0
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    expose: [6379]
