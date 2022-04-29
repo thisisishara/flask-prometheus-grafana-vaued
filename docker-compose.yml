@@ -55,15 +55,15 @@ services:
     networks:
       - sliit_vaued_network
     ports:
-      - 9093:8080
+      - "9093:8080"
     expose: [9093]
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:rw"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
     depends_on:
       - redis
 
@@ -72,5 +72,5 @@ services:
     container_name: redis
     restart: always
     ports:
-      - 6379:6379
+      - "6379:6379"
     expose: [6379]
