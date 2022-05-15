@@ -1,0 +1,823 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "R_YD5jwnz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "editorMode": "code",
+          "expr": "rate(container_cpu_system_seconds_total{name=~\"vaued_app_container|cadvisor|grafana_container|redis|prometheus_container\"}[1m])",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cumulative system CPU time consumed by Containers",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "R_YD5jwnz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 35,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepBefore",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 3,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"running\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Running"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"paused\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Paused"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"stopped\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Stopped"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stopped"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Running"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "expr": "engine_daemon_container_states_containers{state=\"running\"}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "expr": "engine_daemon_container_states_containers{state=\"paused\"}",
+          "hide": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "expr": "engine_daemon_container_states_containers{state=\"stopped\"}",
+          "hide": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Container status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "R_YD5jwnz"
+      },
+      "description": "The count of containers in various states",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "blue",
+                "value": 1
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"paused\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Paused"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"running\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Running"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "engine_daemon_container_states_containers{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"stopped\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Stopped"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 20,
+          "valueSize": 40
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "8.5.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "expr": "engine_daemon_container_states_containers",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "R_YD5jwnz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"accepted\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Accepted"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"assigned\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Assigned"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"complete\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Complete"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"failed\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Failed"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"new\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "New"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"orphaned\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Orphaned"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"pending\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Pending"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"preparing\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Preparing"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"starting\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Starting"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"shutdown\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Shutdown"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"running\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Running"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"remove\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Remove"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"rejected\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Rejected"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "swarm_manager_tasks_total{instance=\"host.docker.internal:9323\", job=\"docker\", state=\"ready\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Ready"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 15,
+          "valueSize": 20
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "expr": "swarm_manager_tasks_total",
+          "refId": "A"
+        }
+      ],
+      "title": "Swarm status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "R_YD5jwnz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"build_canceled\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Build canceled"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"build_target_not_reachable_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Build target not reachable"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"command_not_supported_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Command not supported"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"dockerfile_empty_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dockerfile empty"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"dockerfile_syntax_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dockerfile syntax error"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"error_processing_commands_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Processing commands error"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"missing_onbuild_arguments_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Missing onbuild arguments"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{instance=\"host.docker.internal:9323\", job=\"docker\", reason=\"unknown_instruction_error\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Unknown instruction"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 15,
+          "valueSize": 20
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "R_YD5jwnz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "rate(builder_builds_failed_total[$__rate_interval])",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Failed image builds Information ",
+      "type": "stat"
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Docker Containers Watch 📦",
+  "uid": "Hqf92yQ7k",
+  "version": 2,
+  "weekStart": ""
+}
